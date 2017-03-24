@@ -15,10 +15,11 @@ conn = psycopg2.connect(**args)
 start = 3000   #2011/7/4
 end = 4350     #2016/9/5 
 
-def day_Check():
+def day_check():
     working_days = rrule.rrule(rrule.DAILY, byweekday=range(0, 5), dtstart=date(2000,1,1), until=date(2020,12,31))
     working_days = [day.strftime("%Y-%m-%d") for day in working_days]
     return working_days
+
 
 def get_fund_ndarr():
     fund = open_valid_file("valid_fund.txt")
@@ -32,6 +33,7 @@ def get_fund_ndarr():
         fund_ndarr = np.array(cur.fetchall()).reshape((end-start+1,-1))
     return fund_ndarr
 
+
 def get_etf_ndarr():
     etf = open_valid_file("valid_etf.txt")
     etf_li = ["'"+name+"'" for name in etf]
@@ -44,22 +46,25 @@ def get_etf_ndarr():
         etf_ndarr = np.array(cur.fetchall()).reshape((6,end-start+1,-1))
     return etf_ndarr
 
+
 def open_valid_file(filename):
     with open(filename,"r") as f:
         valid_li = [line.strip() for line in f]
         return valid_li
 
-def CreateStockTable(ftype,TA):
+
+def create_stock_table(ftype,TA):
     with conn.cursor() as cur:
-        cur.execute('CREATE TABLE fund_SMA ('
+        cur.execute('CREATE TABLE {}_{} ('
                         '_id INTEGER,'
                         'fund_id INTEGER,'
                         'param VARCHAR,'
                         'date INTEGER,'
-                        'SMA FLOAT)')    
+                        '{} FLOAT)'.format(ftype,TA,TA))    
     conn.commit()
 
-def CreateMarketTable(ftype,TA):
+
+def create_market_table(ftype,TA):
     with conn.cursor() as cur:
         cur.execute('CREATE TABLE {}_{} ('
                         '_id INTEGER,'
@@ -68,18 +73,22 @@ def CreateMarketTable(ftype,TA):
                         '{} FLOAT)'.format(ftype,TA,TA))
     conn.commit()
 
-def DropTable(table):
+
+def drop_table(table):
     with conn.cursor() as cur:
         cur.execute("DROP TABLE {}".format(table))    
     
-def LoadData(table):
+
+def load_data(table):
     with conn.cursor() as cur:    
         cur.execute("SELECT * FROM {} ORDER BY _id ".format(table))
         return cur.fetchall()
 
-def ExportData(fname,table):
+
+def export_data(fname,table):
     f = open(fname, 'r')
     with conn.cursor() as cur:
         cur.copy_from(f, table, sep="|")
     conn.commit()
-    f.close() 
+    f.close()
+ 

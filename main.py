@@ -8,11 +8,11 @@ if __name__ == '__main__':
     #print(FundData[1][0])
 
     '''Create fund_TA table'''
-    #每股導向TA
-    mlfunc.CreateStockTable("fund","TA")
+    #TA per stock
+    mlfunc.create_stock_table("fund","TA")
 
     '''TA algorithm'''
     '''----------------------Your Code----------------------'''
 
     '''Insert data to Table'''
-    mlfunc.ExportData("export.txt","fund_TA")
+    mlfunc.export_data("export.txt","fund_TA")
