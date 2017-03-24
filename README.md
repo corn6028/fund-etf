@@ -4,13 +4,28 @@
 基金數：1942支</br>
 ETF數：434支</br>
 ## --------------------------------------------------
-# 基金
-更改fundTA.py
+# 取得NDArray
+### 基金
+get_fund_ndarr()
+### ETF
+get_etf_ndarr()
 </br></br></br>
-# ETF
-更改etfTA.py
+# 建立資料庫
+### TA為市場導向
+CreateMarketTable([基金 or ETF],[TA名稱])
+### TA為每股導向
+CreateStockTable([基金 or ETF],[TA名稱])
 </br></br></br>
-### P.S.
+# 刪除資料庫
+### DropTable([table名稱])
+</br></br></br>
+# 資料匯入資料庫
+### ExportData(export.txt,[table名稱])
+將TA算好的資料要先存在export.txt檔案裡</br>
+export.txt格式可以參考 p.s 3
+</br></br></br>
+
+### P.S
 #### ㄧ. TA有分市場導向跟每股導向
 市場導向如RSI,ADR,ADL等</br>
 每股導向如SMA,RMA等</br>
@@ -21,9 +36,7 @@ ETF數：434支</br>
 2. 如果今天是做ETF的話，由於他欄位比基金多，也可以用param來表示，如"Open","Close","High","Low","Volume","Adj_Close"
 3. 如果今天做ETF剛好又要算移動平均，就這樣表示"Open_10","Open_20","Volume_130",...
 4. 其他～那就直接找我討論吧哈哈哈哈
-#### 三. 把算完的結果匯入資料庫（使用函式ExportData）
-需要先把算好的結果存在export.txt，在使用ExportData函式匯入資料庫</br>
-export.txt格式為：</br>
+#### 三. export.txt格式（使用函式ExportData）
 1. 每股導向 : (_id)|(fund_id)|(param)|(date)|(TA_value)</br>
 0|1|10|0|87.87</br>
 1|1|10|1|78.78</br>
@@ -40,3 +53,10 @@ export.txt格式為：</br>
 4|Volume|4|66.66</br>
 5|Volume|5|77.77</br>
 ...</br>
+#### 四. day_Check函式
+如果對日期轉換有興趣的可以使用這個來換算對應到的日期</br>
+例如： 3000 -> 2011/7/4</br>
+```python
+wkd_li = mlfunc.day_Check()
+print(wkd_li[3000])   #2011-7-4
+```
