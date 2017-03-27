@@ -5,7 +5,7 @@ if __name__ == '__main__':
     '''Get Fund Array'''
     FundData = mlfunc.get_fund_ndarr()
     #print(FundData)
-    #print(FundData[1][0])
+    #print(FundData.shape)
 
     '''Create fund_TA table'''
     #TA per stock
