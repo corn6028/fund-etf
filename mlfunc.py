@@ -43,7 +43,7 @@ def get_etf_ndarr():
                     'WHERE etf_id in (%s) AND date in (%s)  order by _id '
                     %(",".join(etf_li),",".join(str(e) for e in date_li))
                    )
-        etf_ndarr = np.array(cur.fetchall()).reshape((-1,end-start+1,6))
+        etf_ndarr = np.array(cur.fetchall()).reshape((6,-1,end-start+1))
     return etf_ndarr
 
 

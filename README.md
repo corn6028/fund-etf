@@ -10,8 +10,8 @@ get_fund_ndarr()</br>
 shape:(1942,1351)
 ### ETF
 get_etf_ndarr()</br>
-shape:(434,1351,6)</br>
-（第三個象限表達Open,Close,High,Low,Volume,Adj_close這六個數值）
+shape:(6,434,1351)</br>
+（新增的象限表達Open,Close,High,Low,Volume,Adj_close這六個數值）
 </br></br></br>
 # 建立資料庫
 ### TA為市場導向
