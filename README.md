@@ -7,11 +7,15 @@ ETF數：434支</br>
 # 取得NDArray
 ### 基金
 get_fund_ndarr()</br>
-shape:(1942,1351)
+shape:(1942,1351) </br>
+#### 矩陣示意圖
+![Fund_ndarray](Fund_ndarray.png)
 ### ETF
 get_etf_ndarr()</br>
 shape:(6,434,1351)</br>
-（新增的象限表達Open,Close,High,Low,Volume,Adj_close這六個數值）
+（新增的象限表達Open,Close,High,Low,Volume,Adj_close這六個數值）</br>
+#### 矩陣示意圖
+![ETF_ndarray](ETF_ndarray.png)
 </br></br></br>
 # 建立資料庫
 ### TA為市場導向
@@ -23,6 +27,12 @@ create_stock_table([基金 or ETF],[TA名稱])</br>
 </br></br></br>
 # 刪除資料庫
 ### drop_table([table名稱])
+</br></br></br>
+# [NEW] TA演算法撰寫
+### 取得數值矩陣:get_fund_ndarray | get_etf_ndarray
+### 取得相對應的基金orETF陣列:open_valid_file("valid_fund.txt") | open_valid_file("valid_etf.txt")
+### 日期儲存請以[3000]到[4350]的順序存（不要以[0]到[1350]的方式！！！）
+### _id則是由0開始依序往下存
 </br></br></br>
 # 資料匯入資料庫
 ### export_data(export.txt,[table名稱])
